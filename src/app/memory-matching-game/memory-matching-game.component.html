@@ -1,0 +1,23 @@
+<div class="game-info">
+    <p>Moves: {{ moves }}</p>
+    <p>Time: {{ timeElapsed }} seconds</p>
+  </div>
+  
+  <div *ngIf="gameWon" class="win-message">
+    <p>Congratulations! You've won the game in {{ moves }} moves and {{ timeElapsed }} seconds!</p>
+    <button (click)="resetGame()">Play Again</button>
+  </div>
+  
+  <div class="game-board" [class.disabled]="disableBoard || gameWon">
+    <div
+      class="card"
+      *ngFor="let card of cards; let i = index"
+      [class.flipped]="card.isFlipped || card.isMatched"
+      (click)="flipCard(card)"
+    >
+      <div class="card-inner">
+        <div class="card-front">?</div>
+        <div class="card-back">{{ card.value }}</div>
+      </div>
+    </div>
+  </div>
